@@ -32,7 +32,7 @@ class TwitchBot(irc.bot.SingleServerIRCBot):
     def __init__(self, parent, channel, nickname, server, port=6667, password=''):
         self.parent = parent
         if password == '':
-            password = open('pw.txt', 'r').readlines()[0].strip()
+            password = open('../assests/temp/pw.txt', 'r').readlines()[0].strip()
         serverSpec = irc.bot.ServerSpec(server, port, password)
         irc.bot.SingleServerIRCBot.__init__(self, [serverSpec], nickname, nickname)
         self.channel = channel
