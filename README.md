@@ -1,10 +1,11 @@
 Twitch.tv Stream Assistant
 =============
 
-A system that automates a number of tesks to aid in streaming and community involvment.
+A system that automates a number of tasks to aid in streaming and community involvment.
 
-A short feature list (All are WIP)
+A short feature list 
 --------------------
+>(All are WIP)
 
   * IRC Bot
     * View and talk in chat
@@ -39,7 +40,7 @@ So you will need:
  * [Python 2.7](http://www.python.org/download/releases/2.7/)
  * [pipy IRC 8.3 Library](https://pypi.python.org/pypi/irc/)
  * [PyQt4](http://www.riverbankcomputing.com/software/pyqt/download)
- * 
+
 
 Once you have everything installed, run:
     `> path\to\python main.py`
