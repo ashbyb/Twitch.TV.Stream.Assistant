@@ -1,0 +1,23 @@
+<RCC>
+  <qresource prefix="icons">
+    <file>icons/Gnome-Colors-Emblem-Desktop.ico</file>
+    <file>icons/Gnome-Colors-Emblem-Desktop-Orange.ico</file>
+    <file>icons/Gnome-Colors-Emblem-Desktop-Red.ico</file>
+    <file>icons/Gnome-Colors-Emblem-Green.ico</file>
+    <file>icons/Gnome-Computer.ico</file>
+    <file>icons/Gnome-Dialog-Error.ico</file>
+    <file>icons/Gnome-Dialog-Password.ico</file>
+    <file>icons/Gnome-Dialog-Question.ico</file>
+    <file>icons/Gnome-Dialog-Warning.ico</file>
+    <file>icons/Gnome-Edit-Find.ico</file>
+    <file>icons/Gnome-Emblem-Generic.ico</file>
+    <file>icons/Gnome-Emblem-Important.ico</file>
+    <file>icons/Gnome-Emblem-System.ico</file>
+    <file>icons/Gnome-Emblem-Urgent.ico</file>
+    <file>icons/Gnome-Emblem-Web.ico</file>
+    <file>icons/Gnome-Input-Gaming.ico</file>
+  </qresource>
+  <qresource prefix="images">
+    <file>landingLogo_v1.png</file>
+  </qresource>
+</RCC>
