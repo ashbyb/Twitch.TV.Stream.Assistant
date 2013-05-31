@@ -1,8 +1,5 @@
-#Clear the screen before we start
-#clear
-
 #Written by FirelementalNE ported from ashbyb/student/Siye, Copyright 2013 | All Rights Reserved
-sudo echo " aeafesafs "
+
 PATH1=/usr/lib/python2.7/dist-packages/PyQt4/uic/pyuic.py
 TWPYDIR=~/Twitch.TV.Stream.Assistant/src
 TWUIDIR=~/Twitch.TV.Stream.Assistant/assets/ui
@@ -52,10 +49,3 @@ echo "+----------------------+"
 echo "|  Finished Compiling! |"
 echo "+----------------------+"
 
-echo "Press [Enter] key to Finish..."
-read READIT
-
-#Some final clean up (clear screen)
-#clear
-
-#EOF
