@@ -17,7 +17,7 @@ ACCTPY=${TWPYDIR}/src/AccountManagementWindow_v1.py
 
 #Show initial header dialog
 echo "+---------------------------------------+"
-echo "|       Siye\'s Twitch Bot Compiler     |"
+echo "|       Siye's Twitch Bot Compiler     |"
 echo "|                                       |"
 echo "|               [Notice]                |"
 echo "| All paths in this folder are absolute |"
