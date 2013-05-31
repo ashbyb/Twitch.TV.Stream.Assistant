@@ -8,6 +8,18 @@ REM Written by ashbyb/student/Siye, Copyright 2013 | All Rights Reserved
 REM Set the color of the CMD terminal
 color 0A
 
+SET PYUIC4=C:\Python27\Lib\site-packages\PyQt4\uic\pyuic.py
+SET PYRCC4=C:\Python27\Lib\site-packages\PyQt4\pyrcc4.exe
+SET TWPYDIR=..\..
+SET TWUIDIR=..\ui
+SET MAINUI=%TWUIDIR%\MainWindow_v1.ui
+SET MAINPY=%TWPYDIR%\MainWindow_v1.py
+SET ACCTUI=%TWUIDIR%\AccountManagementWindow_v1.ui
+SET ACCTPY=%TWPYDIR}%AccountManagementWindow_v1.py
+SET MEDIAQRC=%TWPYDIR%\media.qrc
+SET MEDIAPY=%TWPYDIR%\media_rc.py
+
+
 REM Show initial header dialog
 Echo +---------------------------------------+
 Echo ^|       Siye's Twitch Bot Compiler      ^|
@@ -27,21 +39,21 @@ Echo +------------------------------+
 Echo ^| Now Compiling Main Window... ^|
 Echo +------------------------------+
 
-"C:\Python27\Lib\site-packages\PyQt4\uic\pyuic.py" "C:\Users\morro_000\workspace\TwitchChatBot\MainWindow_v1.ui" -o "C:\Users\morro_000\workspace\TwitchChatBot\MainWindow_v1.py"
+%PYUIC4% %MAINUI% -o %MAINPY%
 
 REM Compile the Account Management window ".ui" file to a valid ".py" file
 Echo +---------------------------------------------+
 Echo ^| Now Compiling Accounts Management Window... ^|
 Echo +---------------------------------------------+
 
-"C:\Python27\Lib\site-packages\PyQt4\uic\pyuic.py" "C:\Users\morro_000\workspace\TwitchChatBot\AccountManagementWindow_v1.ui" -o "C:\Users\morro_000\workspace\TwitchChatBot\AccountManagementWindow_v1.py"
+%PYUIC4% %ACCTUI% -o %ACCTPY%
 
 REM Compile the icons resource file ".qrc" to a valid ".py" file so the GUI can use the contained assets
 Echo +---------------------------------+
 Echo ^| Now Compiling Image Assets...   ^|
 Echo +---------------------------------+
 
-"C:\Python27\Lib\site-packages\PyQt4\pyrcc4.exe" "C:\Users\morro_000\workspace\TwitchChatBot\media.qrc" -o "C:\Users\morro_000\workspace\TwitchChatBot\media_rc.py"
+%PYRCC4% %TWPYDIR%\src\mediaLinux.qrc -o %TWPYDIR%\src\media_rc.py
 
 Echo +----------------------+
 Echo ^|  Finished Compiling! ^|
