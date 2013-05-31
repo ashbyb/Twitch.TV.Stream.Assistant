@@ -15,7 +15,7 @@ SET TWUIDIR=..\ui
 SET MAINUI=%TWUIDIR%\MainWindow_v1.ui
 SET MAINPY=%TWPYDIR%\MainWindow_v1.py
 SET ACCTUI=%TWUIDIR%\AccountManagementWindow_v1.ui
-SET ACCTPY=%TWPYDIR}%AccountManagementWindow_v1.py
+SET ACCTPY=%TWPYDIR%\AccountManagementWindow_v1.py
 SET MEDIAQRC=%TWPYDIR%\media.qrc
 SET MEDIAPY=%TWPYDIR%\media_rc.py
 
@@ -39,14 +39,14 @@ Echo +------------------------------+
 Echo ^| Now Compiling Main Window... ^|
 Echo +------------------------------+
 
-%PYUIC4% %MAINUI% -o %MAINPY%
+C:\Python27\python.exe %PYUIC4% %MAINUI% -o %MAINPY%
 
 REM Compile the Account Management window ".ui" file to a valid ".py" file
 Echo +---------------------------------------------+
 Echo ^| Now Compiling Accounts Management Window... ^|
 Echo +---------------------------------------------+
 
-%PYUIC4% %ACCTUI% -o %ACCTPY%
+C:\Python27\python.exe %PYUIC4% %ACCTUI% -o %ACCTPY%
 
 REM Compile the icons resource file ".qrc" to a valid ".py" file so the GUI can use the contained assets
 Echo +---------------------------------+
