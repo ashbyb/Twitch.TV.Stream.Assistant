@@ -16,7 +16,7 @@ VERSION = 0.1
 
 # Standard python lib imports
 import sys
-import Queue
+
 import time
 import datetime
 
@@ -29,68 +29,11 @@ from MainWindow_v1 import Ui_MainWindow
 # Import Classes for child dialogs
 from AccountManagementClass_v1 import Account_Management_Dialog
 
-# Import out bot class
+# Import out IRC Bot class
 from bot import TwitchBot
 
-
-# Thread class for running the main processEvents loop of the twitch bot class
-class twitchBotThread(QtCore.QThread):
-    def __init__(self, parent, ident, session, running=True, failureThreshold=5):
-        super(twitchBotThread, self).__init__(parent)
-        self.parent = parent
-        self.id = ident
-        self.session = session
-        self.running = running
-        self.failureThreshold = failureThreshold
-
-        # Let's construct our bot with our session data
-        self.bot = TwitchBot(self, self.session['channel'], self.session['nickname'], self.session['server'], self.session['port'], self.session['password'])
-
-    def stop(self):
-        self.running = False
-
-    def run(self):
-
-        failures = 0
-
-        while self.running:
-            try:
-                self._run()
-            except:
-                failures += 1
-                if failures > self.failureThreshold:
-                    import traceback
-                    print "TWITCHBOT ERROR:", sys.exc_info()[:-1], traceback.print_tb(sys.exc_info()[2], file=sys.stdout)
-                    self.running = False
-                else:
-                    time.sleep(3)
-            else:
-                #self.emit(QtCore.SIGNAL("bidsCountQueryThreadResults"), self.bids)
-                self.running = False
-
-    def _run(self):
-        ''' Main function of thread. Runs the twitch bot main loop '''
-
-        self.bot.start()
-
-
-# Class that handles giving threads IDs (PyQt does not implement this natively)
-class threadIdSpooler(QtCore.QObject):
-    def __init__(self, parent):
-        super(threadIdSpooler, self).__init__(parent)
-        self.curID = 0
-        self.pool = Queue.Queue()
-
-    def requestID(self):
-        if self.pool.empty():
-            self.curID += 1
-            return self.curID - 1
-        else:
-            return self.pool.get_nowait()
-
-    def returnID(self):
-        returningID = self.sender().id
-        self.pool.put_nowait(returningID)
+# Import our threading classes
+from Threading import threadIdSpooler, twitchBotThread
 
 
 # Create a class for our main window
