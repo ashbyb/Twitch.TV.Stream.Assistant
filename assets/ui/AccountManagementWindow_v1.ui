@@ -6,15 +6,15 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>297</width>
-    <height>308</height>
+    <width>313</width>
+    <height>326</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Account Management</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="media.qrc">
+   <iconset>
     <normaloff>:/icons/icons/Gnome-Input-Gaming.ico</normaloff>:/icons/icons/Gnome-Input-Gaming.ico</iconset>
   </property>
   <layout class="QGridLayout" name="gridLayout">
@@ -31,6 +31,10 @@
        <widget class="QPushButton" name="pushButton_remove">
         <property name="text">
          <string>Remove Selected Account</string>
+        </property>
+        <property name="icon">
+         <iconset resource="../../src/media.qrc">
+          <normaloff>:/icons/assets/icons/Gnome-Colors-Emblem-Desktop-Red.ico</normaloff>:/icons/assets/icons/Gnome-Colors-Emblem-Desktop-Red.ico</iconset>
         </property>
        </widget>
       </item>
@@ -89,6 +93,10 @@
        <widget class="QPushButton" name="pushButton_add">
         <property name="text">
          <string>Add Account</string>
+        </property>
+        <property name="icon">
+         <iconset resource="../../src/media.qrc">
+          <normaloff>:/icons/assets/icons/Gnome-Colors-Emblem-Green.ico</normaloff>:/icons/assets/icons/Gnome-Colors-Emblem-Green.ico</iconset>
         </property>
        </widget>
       </item>
@@ -153,7 +161,7 @@
   </layout>
  </widget>
  <resources>
-  <include location="media.qrc"/>
+  <include location="../../src/media.qrc"/>
  </resources>
  <connections>
   <connection>

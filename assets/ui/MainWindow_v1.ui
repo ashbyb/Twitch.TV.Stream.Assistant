@@ -6,15 +6,15 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>262</width>
-    <height>239</height>
+    <width>260</width>
+    <height>228</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Twitch IRC Bot v1.0</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="media.qrc">
+   <iconset>
     <normaloff>:/icons/icons/Gnome-Input-Gaming.ico</normaloff>:/icons/icons/Gnome-Input-Gaming.ico</iconset>
   </property>
   <widget class="QWidget" name="centralwidget">
@@ -28,7 +28,7 @@
     <item>
      <widget class="QStackedWidget" name="stackedWidget_main">
       <property name="currentIndex">
-       <number>1</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="page_3">
        <layout class="QVBoxLayout" name="verticalLayout_5">
@@ -41,7 +41,7 @@
         <item>
          <widget class="QFrame" name="frame">
           <property name="frameShape">
-           <enum>QFrame::StyledPanel</enum>
+           <enum>QFrame::NoFrame</enum>
           </property>
           <property name="frameShadow">
            <enum>QFrame::Raised</enum>
@@ -72,7 +72,7 @@
               <string/>
              </property>
              <property name="pixmap">
-              <pixmap resource="media.qrc">:/images/landingLogo_v1.png</pixmap>
+              <pixmap resource="../../src/media.qrc">:/images/assets/images/landingLogo_v1.png</pixmap>
              </property>
              <property name="scaledContents">
               <bool>false</bool>
@@ -101,8 +101,8 @@
            <string>Authenticate as: opopbot</string>
           </property>
           <property name="icon">
-           <iconset resource="media.qrc">
-            <normaloff>:/icons/icons/Gnome-Emblem-Web.ico</normaloff>:/icons/icons/Gnome-Emblem-Web.ico</iconset>
+           <iconset resource="../../src/media.qrc">
+            <normaloff>:/icons/assets/icons/Gnome-Emblem-Web.ico</normaloff>:/icons/assets/icons/Gnome-Emblem-Web.ico</iconset>
           </property>
           <property name="autoDefault">
            <bool>true</bool>
@@ -118,10 +118,10 @@
         <item>
          <widget class="QFrame" name="frame_2">
           <property name="frameShape">
-           <enum>QFrame::StyledPanel</enum>
+           <enum>QFrame::NoFrame</enum>
           </property>
           <property name="frameShadow">
-           <enum>QFrame::Raised</enum>
+           <enum>QFrame::Plain</enum>
           </property>
           <layout class="QHBoxLayout" name="horizontalLayout_2">
            <property name="spacing">
@@ -155,8 +155,8 @@
               <string>Manage Accounts </string>
              </property>
              <property name="icon">
-              <iconset resource="media.qrc">
-               <normaloff>:/icons/icons/Gnome-Dialog-Password.ico</normaloff>:/icons/icons/Gnome-Dialog-Password.ico</iconset>
+              <iconset resource="../../src/media.qrc">
+               <normaloff>:/icons/assets/icons/Gnome-Dialog-Password.ico</normaloff>:/icons/assets/icons/Gnome-Dialog-Password.ico</iconset>
              </property>
              <property name="iconSize">
               <size>
@@ -215,8 +215,8 @@
           </property>
           <widget class="QWidget" name="chatview">
            <attribute name="icon">
-            <iconset resource="media.qrc">
-             <normaloff>:/icons/icons/Gnome-Computer.ico</normaloff>:/icons/icons/Gnome-Computer.ico</iconset>
+            <iconset resource="../../src/media.qrc">
+             <normaloff>:/icons/assets/icons/Gnome-Computer.ico</normaloff>:/icons/assets/icons/Gnome-Computer.ico</iconset>
            </attribute>
            <attribute name="title">
             <string>Chat</string>
@@ -268,8 +268,8 @@
                 <string>Time</string>
                </property>
                <property name="icon">
-                <iconset resource="media.qrc">
-                 <normaloff>:/icons/icons/Gnome-Emblem-Urgent.ico</normaloff>:/icons/icons/Gnome-Emblem-Urgent.ico</iconset>
+                <iconset resource="../../src/media.qrc">
+                 <normaloff>:/icons/assets/icons/Gnome-Emblem-Urgent.ico</normaloff>:/icons/assets/icons/Gnome-Emblem-Urgent.ico</iconset>
                </property>
               </column>
               <column>
@@ -277,8 +277,8 @@
                 <string>Name</string>
                </property>
                <property name="icon">
-                <iconset resource="media.qrc">
-                 <normaloff>:/icons/icons/Gnome-Input-Gaming.ico</normaloff>:/icons/icons/Gnome-Input-Gaming.ico</iconset>
+                <iconset resource="../../src/media.qrc">
+                 <normaloff>:/icons/assets/icons/Gnome-Input-Gaming.ico</normaloff>:/icons/assets/icons/Gnome-Input-Gaming.ico</iconset>
                </property>
               </column>
               <column>
@@ -286,8 +286,8 @@
                 <string>Message</string>
                </property>
                <property name="icon">
-                <iconset resource="media.qrc">
-                 <normaloff>:/icons/icons/Gnome-Dialog-Warning.ico</normaloff>:/icons/icons/Gnome-Dialog-Warning.ico</iconset>
+                <iconset resource="../../src/media.qrc">
+                 <normaloff>:/icons/assets/icons/Gnome-Dialog-Warning.ico</normaloff>:/icons/assets/icons/Gnome-Dialog-Warning.ico</iconset>
                </property>
               </column>
              </widget>
@@ -299,8 +299,8 @@
           </widget>
           <widget class="QWidget" name="statistics">
            <attribute name="icon">
-            <iconset resource="media.qrc">
-             <normaloff>:/icons/icons/Gnome-Emblem-System.ico</normaloff>:/icons/icons/Gnome-Emblem-System.ico</iconset>
+            <iconset resource="../../src/media.qrc">
+             <normaloff>:/icons/assets/icons/Gnome-Emblem-System.ico</normaloff>:/icons/assets/icons/Gnome-Emblem-System.ico</iconset>
            </attribute>
            <attribute name="title">
             <string>Statistics</string>
@@ -327,8 +327,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>262</width>
-     <height>21</height>
+     <width>260</width>
+     <height>18</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -350,8 +350,8 @@
   </widget>
   <action name="actionExit">
    <property name="icon">
-    <iconset>
-     <normaloff>:/icons/H:/Users/student/workspace/Beezid/src/assets/image/system/icons/Gnome-Application-Exit.ico</normaloff>:/icons/H:/Users/student/workspace/Beezid/src/assets/image/system/icons/Gnome-Application-Exit.ico</iconset>
+    <iconset resource="../../src/media.qrc">
+     <normaloff>:/icons/assets/icons/Gnome-Dialog-Error.ico</normaloff>:/icons/assets/icons/Gnome-Dialog-Error.ico</iconset>
    </property>
    <property name="text">
     <string>Exit</string>
@@ -362,8 +362,8 @@
   </action>
   <action name="actionUser_Guide">
    <property name="icon">
-    <iconset resource="media.qrc">
-     <normaloff>:/icons/icons/Gnome-Edit-Find.ico</normaloff>:/icons/icons/Gnome-Edit-Find.ico</iconset>
+    <iconset resource="../../src/media.qrc">
+     <normaloff>:/icons/assets/icons/Gnome-Edit-Find.ico</normaloff>:/icons/assets/icons/Gnome-Edit-Find.ico</iconset>
    </property>
    <property name="text">
     <string>User Guide</string>
@@ -374,8 +374,8 @@
   </action>
   <action name="actionAbout">
    <property name="icon">
-    <iconset resource="media.qrc">
-     <normaloff>:/icons/icons/Gnome-Dialog-Question.ico</normaloff>:/icons/icons/Gnome-Dialog-Question.ico</iconset>
+    <iconset resource="../../src/media.qrc">
+     <normaloff>:/icons/assets/icons/Gnome-Dialog-Question.ico</normaloff>:/icons/assets/icons/Gnome-Dialog-Question.ico</iconset>
    </property>
    <property name="text">
     <string>About</string>
@@ -386,7 +386,7 @@
   </action>
  </widget>
  <resources>
-  <include location="media.qrc"/>
+  <include location="../../src/media.qrc"/>
  </resources>
  <connections>
   <connection>

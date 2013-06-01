@@ -90,24 +90,7 @@ class Account_Management_Dialog(QtGui.QDialog):
 
         settings = {}
 
-        # Layout Defaults Tab Items
-        settings["checkBox_bid_log"] = self.accounts.checkBox_bid_log.isChecked()
-        settings["checkBox_bid_timings"] = self.accounts.checkBox_bid_timings.isChecked()
-        settings["checkBox_auction_peers"] = self.accounts.checkBox_auction_peers.isChecked()
-        settings["checkBox_autobeezids"] = self.accounts.checkBox_autobeezids.isChecked()
-        settings["checkBox_snipers"] = self.accounts.checkBox_snipers.isChecked()
-        settings["checkBox_bidder_settings"] = self.accounts.checkBox_bidder_settings.isChecked()
-
-        # Bidder Settings Tab Items
-        settings["doubleSpinBox_bidder_threshold"] = self.accounts.doubleSpinBox_bidder_threshold.value()
-        settings["groupBox_bidder_minimum"] = self.accounts.groupBox_bidder_minimum.isChecked()
-        settings["doubleSpinBox_bidder_minimum"] = self.accounts.doubleSpinBox_bidder_minimum.value()
-        settings["groupBox_bidder_maximum_bids"] = self.accounts.groupBox_bidder_maximum_bids.isChecked()
-        settings["spinBox_bidder_maximum_bids"] = self.accounts.spinBox_bidder_maximum_bids.value()
-        settings["groupBox_bidder_maximum"] = self.accounts.groupBox_bidder_maximum.isChecked()
-        settings["doubleSpinBox_bidder_maximum"] = self.accounts.doubleSpinBox_bidder_maximum.value()
-        settings["checkBox_bidder_against_autobeezids"] = self.accounts.checkBox_bidder_against_autobeezids.isChecked()
-        settings["checkBox_bidder_against_snipers"] = self.accounts.checkBox_bidder_against_snipers.isChecked()
+        # TODO: Add things to be saved here
 
         return settings
 
@@ -117,21 +100,4 @@ class Account_Management_Dialog(QtGui.QDialog):
         Used in session persistence.
         '''
 
-        # Layout Defaults Tab Items
-        self.accounts.checkBox_bid_log.setChecked(data.get(QtCore.QString("checkBox_bid_log"), QtCore.QVariant(True)).toBool())
-        self.accounts.checkBox_bid_timings.setChecked(data.get(QtCore.QString("checkBox_bid_timings"), QtCore.QVariant(True)).toBool())
-        self.accounts.checkBox_auction_peers.setChecked(data.get(QtCore.QString("checkBox_auction_peers"), QtCore.QVariant(False)).toBool())
-        self.accounts.checkBox_autobeezids.setChecked(data.get(QtCore.QString("checkBox_autobeezids"), QtCore.QVariant(False)).toBool())
-        self.accounts.checkBox_snipers.setChecked(data.get(QtCore.QString("checkBox_snipers"), QtCore.QVariant(False)).toBool())
-        self.accounts.checkBox_bidder_settings.setChecked(data.get(QtCore.QString("checkBox_bidder_settings"), QtCore.QVariant(False)).toBool())
-
-        # Bidder Settings Tab Items
-        self.accounts.doubleSpinBox_bidder_threshold.setValue(data.get(QtCore.QString("doubleSpinBox_bidder_threshold"), QtCore.QVariant(0.500)).toDouble()[0])
-        self.accounts.groupBox_bidder_minimum.setChecked(data.get(QtCore.QString("groupBox_bidder_minimum"), QtCore.QVariant(False)).toBool())
-        self.accounts.doubleSpinBox_bidder_minimum.setValue(data.get(QtCore.QString("doubleSpinBox_bidder_minimum"), QtCore.QVariant(0.00)).toDouble()[0])
-        self.accounts.groupBox_bidder_maximum_bids.setChecked(data.get(QtCore.QString("groupBox_bidder_maximum_bids"), QtCore.QVariant(False)).toBool())
-        self.accounts.spinBox_bidder_maximum_bids.setValue(data.get(QtCore.QString("spinBox_bidder_maximum_bids"), QtCore.QVariant(0)).toInt()[0])
-        self.accounts.groupBox_bidder_maximum.setChecked(data.get(QtCore.QString("groupBox_bidder_maximum"), QtCore.QVariant(False)).toBool())
-        self.accounts.doubleSpinBox_bidder_maximum.setValue(data.get(QtCore.QString("doubleSpinBox_bidder_maximum"), QtCore.QVariant(0.00)).toDouble()[0])
-        self.accounts.checkBox_bidder_against_autobeezids.setChecked(data.get(QtCore.QString("checkBox_bidder_against_autobeezids"), QtCore.QVariant(True)).toBool())
-        self.accounts.checkBox_bidder_against_snipers.setChecked(data.get(QtCore.QString("checkBox_bidder_against_snipers"), QtCore.QVariant(True)).toBool())
+        pass

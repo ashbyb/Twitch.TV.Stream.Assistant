@@ -14,6 +14,9 @@ import Queue
 # Import Core Qt modules
 from PyQt4 import QtCore, QtGui
 
+# Import out IRC Bot class
+from bot import TwitchBot
+
 
 # Thread class for running the main processEvents loop of the twitch bot class
 class twitchBotThread(QtCore.QThread):

@@ -29,11 +29,8 @@ from MainWindow_v1 import Ui_MainWindow
 # Import Classes for child dialogs
 from AccountManagementClass_v1 import Account_Management_Dialog
 
-# Import out IRC Bot class
-from bot import TwitchBot
-
 # Import our threading classes
-from Threading import threadIdSpooler, twitchBotThread
+from threadingClasses import threadIdSpooler, twitchBotThread
 
 
 # Create a class for our main window
@@ -65,10 +62,59 @@ class Main(QtGui.QMainWindow):
         #################################
 
         # Load persistent session data
-        #self.loadPersistentSettings()
+        self.loadPersistentSettings()
 
         # Emit Ready state
         #self.emit(QtCore.SIGNAL("appendLog"), "Twitch Bot Interface has booted. Ready to Work!")
+
+    def loadPersistentSettings(self):
+        ''' Called on startup. Loads all settings that should persist from session to session across all UI elements '''
+
+        self.persistentSettings.beginGroup("MainWindow")
+        self.resize(self.persistentSettings.value("size", QtCore.QSize(260, 228)).toSize())
+        self.move(self.persistentSettings.value("pos", QtCore.QPoint(200, 200)).toPoint())
+        self.importMainWindowPersistentItems(self.persistentSettings.value("persistentItems", {}).toMap())
+        self.persistentSettings.endGroup()
+
+        self.persistentSettings.beginGroup("AccountsWindow")
+        self.accounts.loadAccountList(self.persistentSettings.value("accountList", []).toList())
+        self.persistentSettings.endGroup()
+
+    def savePersistentSettings(self):
+        ''' Called at shutdown of app. Saves all settings that should persist from session to session for all UI elements '''
+
+        self.persistentSettings.beginGroup("MainWindow")
+        self.persistentSettings.setValue("size", self.size())
+        self.persistentSettings.setValue("pos", self.pos())
+        self.persistentSettings.setValue("persistentItems", QtCore.QVariant(self.exportMainWindowPersistentItems()))
+        self.persistentSettings.endGroup()
+
+        self.persistentSettings.beginGroup("AccountsWindow")
+        self.persistentSettings.setValue("accountList", QtCore.QVariant(self.accounts.exportAccountList()))
+        self.persistentSettings.endGroup()
+
+    def exportMainWindowPersistentItems(self):
+        ''' Called on program close. Saves any setting in the main window that need to be loaded on next startup '''
+
+        pass
+
+    def importMainWindowPersistentItems(self, data):
+        ''' Called on start of program. Settings saved from previous program close are now loaded into the UI '''
+
+        pass
+
+    def closeEvent(self, event):
+        '''
+        This event is thrown when a close event is create (File>Exit or clicking the 'X' symbol in the window manager)
+        A simple "Are you sure" dialog is presented. If 'no' the event is ignored.
+        Saving persistent settings to the resident OS ini file is done if "yes" is given. This is done right before the window closes.
+        '''
+
+        if QtGui.QMessageBox.question(self, 'Alert', "Are you sure you want to quit?", QtGui.QMessageBox.Yes | QtGui.QMessageBox.No, QtGui.QMessageBox.No) == QtGui.QMessageBox.Yes:
+            self.savePersistentSettings()
+            event.accept()
+        else:
+            event.ignore()
 
     @QtCore.pyqtSignature("")
     def on_pushButton_manage_accounts_clicked(self):
@@ -109,11 +155,11 @@ def main():
     # Start up main PyQT Application loop
     app = QtGui.QApplication(sys.argv)
 
-    # Build main window
+    # Build and show main window
     window = Main()
     window.show()
 
-    #Exit program when our window is closed.
+    # Exit program when our window is closed.
     sys.exit(app.exec_())
 
 if __name__ == "__main__":

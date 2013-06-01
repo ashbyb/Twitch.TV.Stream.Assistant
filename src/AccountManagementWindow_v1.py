@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'C:\Users\morro_000\workspace\TwitchChatBot\AccountManagementWindow_v1.ui'
+# Form implementation generated from reading ui file '..\ui\AccountManagementWindow_v1.ui'
 #
-# Created: Sun May 19 15:02:10 2013
+# Created: Sat Jun 01 11:26:13 2013
 #      by: PyQt4 UI code generator 4.9.6
 #
 # WARNING! All changes made in this file will be lost!
@@ -26,7 +26,7 @@ except AttributeError:
 class Ui_Dialog_Account_Management(object):
     def setupUi(self, Dialog_Account_Management):
         Dialog_Account_Management.setObjectName(_fromUtf8("Dialog_Account_Management"))
-        Dialog_Account_Management.resize(297, 308)
+        Dialog_Account_Management.resize(313, 326)
         icon = QtGui.QIcon()
         icon.addPixmap(QtGui.QPixmap(_fromUtf8(":/icons/icons/Gnome-Input-Gaming.ico")), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         Dialog_Account_Management.setWindowIcon(icon)
@@ -38,6 +38,9 @@ class Ui_Dialog_Account_Management(object):
         self.gridLayout_2 = QtGui.QGridLayout(self.groupBox_2)
         self.gridLayout_2.setObjectName(_fromUtf8("gridLayout_2"))
         self.pushButton_remove = QtGui.QPushButton(self.groupBox_2)
+        icon1 = QtGui.QIcon()
+        icon1.addPixmap(QtGui.QPixmap(_fromUtf8(":/icons/assets/icons/Gnome-Colors-Emblem-Desktop-Red.ico")), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.pushButton_remove.setIcon(icon1)
         self.pushButton_remove.setObjectName(_fromUtf8("pushButton_remove"))
         self.gridLayout_2.addWidget(self.pushButton_remove, 0, 0, 1, 1)
         self.gridLayout.addWidget(self.groupBox_2, 3, 1, 1, 1)
@@ -65,6 +68,9 @@ class Ui_Dialog_Account_Management(object):
         self.lineEdit_password_confirm.setObjectName(_fromUtf8("lineEdit_password_confirm"))
         self.verticalLayout_2.addWidget(self.lineEdit_password_confirm)
         self.pushButton_add = QtGui.QPushButton(self.groupBox)
+        icon2 = QtGui.QIcon()
+        icon2.addPixmap(QtGui.QPixmap(_fromUtf8(":/icons/assets/icons/Gnome-Colors-Emblem-Green.ico")), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.pushButton_add.setIcon(icon2)
         self.pushButton_add.setObjectName(_fromUtf8("pushButton_add"))
         self.verticalLayout_2.addWidget(self.pushButton_add)
         self.gridLayout.addWidget(self.groupBox, 1, 1, 2, 1)

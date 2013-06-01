@@ -10,7 +10,7 @@ color 0A
 
 SET PYUIC4=C:\Python27\Lib\site-packages\PyQt4\uic\pyuic.py
 SET PYRCC4=C:\Python27\Lib\site-packages\PyQt4\pyrcc4.exe
-SET TWPYDIR=..\..
+SET TWPYDIR=..\..\src
 SET TWUIDIR=..\ui
 SET MAINUI=%TWUIDIR%\MainWindow_v1.ui
 SET MAINPY=%TWPYDIR%\MainWindow_v1.py
@@ -53,7 +53,7 @@ Echo +---------------------------------+
 Echo ^| Now Compiling Image Assets...   ^|
 Echo +---------------------------------+
 
-%PYRCC4% %TWPYDIR%\src\mediaLinux.qrc -o %TWPYDIR%\src\media_rc.py
+%PYRCC4% %TWPYDIR%\media.qrc -o %TWPYDIR%\media_rc.py
 
 Echo +----------------------+
 Echo ^|  Finished Compiling! ^|
