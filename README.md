@@ -8,7 +8,7 @@ A short feature list
 >(All are WIP)
 
   * IRC Bot
-    * View and talk in chat
+    * View and talk in chat from the program
     * Track who is online (filter by mod, op, voice, subscriber)
     * Moderate chat (links, bans, spam, caps)
     * Numerous triggers (!command <arguments>)
@@ -44,3 +44,10 @@ So you will need:
 
 Once you have everything installed, run:
     `> path\to\python main.py`
+
+Drawbacks and Limitations
+-------------------------
+
+Moobot and other JTV bot systems exist already and work well. There is no reason to re-invent the wheel here. All features needs to be unique and useful. 
+
+Moobot does drop out of a channel that is idle. Possible drawback to moobot. As features are added, need to be able to show they don't already exist out there.

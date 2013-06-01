@@ -16,7 +16,8 @@ To talk to the bot:
 
 The known commands are:
 
-    TBD
+    ^helloworld :   OpOpBot will say hello to the channel
+    ^stats      :   OpOpBot will print stats on all the rooms and users it can see to the room (assume one room for now)
 '''
 
 # Import core modules from python IRC library
@@ -29,34 +30,31 @@ from PyQt4 import QtCore
 
 
 class TwitchBot(irc.bot.SingleServerIRCBot):
-    def __init__(self, parent, channel, nickname, server, port=6667, password=''):
+    def __init__(self, parent, channel, nickname, server, port, password):
         self.parent = parent
-        if password == '':
-            password = open('../assets/temp/pw.txt', 'r').readlines()[0].strip()
-        serverSpec = irc.bot.ServerSpec(server, port, password)
-        irc.bot.SingleServerIRCBot.__init__(self, [serverSpec], nickname, nickname)
         self.channel = channel
+        serverSpec = irc.bot.ServerSpec(server, port, password)
+        irc.bot.SingleServerIRCBot.__init__(self, [serverSpec], nickname, nickname, reconnection_interval=0)
 
     def on_nicknameinuse(self, c, e):
         c.nick(c.get_nickname() + "_")
 
     def on_welcome(self, c, e):
+        print "yar"
         self.parent.emit(QtCore.SIGNAL("IRCAuthenticationSuccess"))
         c.join(self.channel)
 
     def on_privmsg(self, c, e):
-        self.do_command(e, e.arguments[0])
+        pass
 
     def on_pubmsg(self, c, e):
-        self.parent.emit(QtCore.SIGNAL("anIRCMessage"), [e.arguments[0], e.source.nick])
-        a = e.arguments[0].split(":", 1)
-        if len(a) > 1 and irc.strings.lower(a[0]) == irc.strings.lower(self.connection.get_nickname()):
-            self.do_command(e, a[1].strip())
+        self.parent.emit(QtCore.SIGNAL("anIRCMessage"), [e.source.nick, e.arguments[0]])
+        if len(e.arguments[0]) > 1 and irc.strings.lower(e.arguments[0][0]) == irc.strings.lower('^'):
+            self.do_command(e, e.arguments[0][1:].strip())
         return
 
     def do_command(self, e, cmd):
-        nick = e.source.nick
-        target = self.channels.keys()[0]
+        nick = self.channel
         c = self.connection
 
         if cmd == "disconnect":
@@ -64,7 +62,6 @@ class TwitchBot(irc.bot.SingleServerIRCBot):
         elif cmd == "die":
             self.die()
         elif cmd == "stats":
-            nick = "#rpigamer"
             for chname, chobj in self.channels.items():
                 c.privmsg(nick, "--- Channel statistics ---")
                 c.privmsg(nick, "Channel: " + chname)
@@ -78,37 +75,6 @@ class TwitchBot(irc.bot.SingleServerIRCBot):
                 voiced.sort()
                 c.privmsg(nick, "Voiced: " + ", ".join(voiced))
         elif cmd == "helloworld":
-            print "trying to talk"
-            c.send_raw("Hello World I am OpOpBot.")
-            c.notice("#rpigamer", "test3Test")
-            c.notice("#rpigamer", "test2Test")
-            c.privmsg("#rpigamer", "test1Test")
+            c.privmsg(nick, "Hello World. I am OpOpBot.")
         else:
             pass
-
-
-def main():
-    import sys
-    if len(sys.argv) != 5:
-        print "Usage: testbot <server[:port]> <channel> <nickname> <password>"
-        sys.exit(1)
-
-    s = sys.argv[1].split(":", 1)
-    server = s[0]
-    if len(s) == 2:
-        try:
-            port = int(s[1])
-        except ValueError:
-            print "Error: Erroneous port."
-            sys.exit(1)
-    else:
-        port = 6667
-    channel = sys.argv[2]
-    nickname = sys.argv[3]
-    password = sys.argv[4]
-
-    bot = TwitchBot(channel, nickname, server, port, password)
-    bot.start()
-
-if __name__ == "__main__":
-    main()

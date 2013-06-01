@@ -38,13 +38,10 @@ class Main(QtGui.QMainWindow):
         QtGui.QMainWindow.__init__(self, None)
 
         # Create persistent settings object
-        self.persistentSettings = QtCore.QSettings(QtCore.QSettings.IniFormat, QtCore.QSettings.UserScope, "Sye Products", "TwitchBot v%s" % VERSION)
+        self.persistentSettings = QtCore.QSettings(QtCore.QSettings.IniFormat, QtCore.QSettings.UserScope, "OpposingOpinions Products", "TwitchBot v%s" % VERSION)
 
         # Create class to maintain / distribute unique thread IDs
         self.threadIdSpooler = threadIdSpooler(self)
-
-        # Create database interface
-        #self.db = db(self, self.persistentSettings.fileName())
 
         # Create the main window class layout
         self.ui = Ui_MainWindow()
@@ -53,18 +50,8 @@ class Main(QtGui.QMainWindow):
         #Create child window classes
         self.accounts = Account_Management_Dialog(self)
 
-        # Signal Slot Connects for various UI elements to status log
-        #QtCore.QObject.connect(self, QtCore.SIGNAL("appendLog"), self.log.appendLog)
-
-        #################################
-        # Final Calls to UI before Boot #
-        #################################
-
         # Load persistent session data
         self.loadPersistentSettings()
-
-        # Emit Ready state
-        #self.emit(QtCore.SIGNAL("appendLog"), "Twitch Bot Interface has booted. Ready to Work!")
 
     def loadPersistentSettings(self):
         ''' Called on startup. Loads all settings that should persist from session to session across all UI elements '''
@@ -125,9 +112,17 @@ class Main(QtGui.QMainWindow):
     def on_commandLinkButton_authenticate_clicked(self):
         ''' Called when we click the authenticate button '''
 
+        # Disable buttons until we fail or succeed
+        self.ui.frame_buttons.setEnabled(False)
+
+        # Update while we wait to authenticate, let the user know what we are doing
+        self.ui.commandLinkButton_authenticate.setText("Authenticating Bot...")
+        self.ui.commandLinkButton_authenticate.setDescription("")
+
         # Spawn bot thread (only 1 at a time for now) TODO: allow for many bots?
         self.twitchBotThread = twitchBotThread(self, self.threadIdSpooler.requestID(), self.accounts.requestSession())
         QtCore.QObject.connect(self.twitchBotThread, QtCore.SIGNAL("finished()"), self.threadIdSpooler.returnID)
+        QtCore.QObject.connect(self.twitchBotThread, QtCore.SIGNAL("finished()"), self.handleTwitchBotThreadDeath)
         QtCore.QObject.connect(self.twitchBotThread, QtCore.SIGNAL("anIRCMessage"), self.handleTwitchBotIRCMessage)
         QtCore.QObject.connect(self.twitchBotThread, QtCore.SIGNAL("IRCAuthenticationSuccess"), self.handleTwitchBotAuthenticationSuccess)
         self.twitchBotThread.start()
@@ -148,6 +143,13 @@ class Main(QtGui.QMainWindow):
 
         self.ui.stackedWidget_main.setCurrentIndex(1) # Set to chat interface
 
+    def handleTwitchBotThreadDeath(self):
+        ''' SLOT. Called by twitch bot thread when it has terminated '''
+
+        # TODO: This logic is simple and only works when we are using 1 bot at a time. If we start using multiple bots at once, then this needs to be modified
+
+        self.ui.commandLinkButton_authenticate.setEnabled(True)
+        self.ui.stackedWidget_main.setCurrentIndex(0) # Set to program start-up interface        
 
 def main():
 

@@ -50,14 +50,14 @@ class twitchBotThread(QtCore.QThread):
                 else:
                     time.sleep(3)
             else:
-                #self.emit(QtCore.SIGNAL("bidsCountQueryThreadResults"), self.bids)
                 self.running = False
 
     def _run(self):
         ''' Main function of thread. Runs the twitch bot main loop '''
 
+        print "Enter"
         self.bot.start()
-
+        print "Exit"
 
 # Class that handles giving threads IDs (PyQt does not implement this natively)
 class threadIdSpooler(QtCore.QObject):
