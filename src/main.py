@@ -16,7 +16,6 @@ VERSION = 0.1
 
 # Standard python lib imports
 import sys
-
 import time
 import datetime
 
@@ -99,13 +98,13 @@ class Main(QtGui.QMainWindow):
         pass
 
     def importMainWindowPersistentItems(self, data):
-        ''' Called on start of program. Settings saved from previous program close are now loaded into the UI '''
+        ''' Called on start of program. Settings saved from previous program's close are now loaded into the UI '''
 
         pass
 
     def closeEvent(self, event):
         '''
-        This event is thrown when a close event is create (File>Exit or clicking the 'X' symbol in the window manager)
+        This event is thrown when a close event is created (File>Exit or clicking the 'X' symbol in the window manager)
         A simple "Are you sure" dialog is presented. If 'no' the event is ignored.
         Saving persistent settings to the resident OS ini file is done if "yes" is given. This is done right before the window closes.
         '''
@@ -117,10 +116,10 @@ class Main(QtGui.QMainWindow):
             event.ignore()
 
     @QtCore.pyqtSignature("")
-    def on_pushButton_manage_accounts_clicked(self):
+    def on_commandLinkButton_manage_accounts_clicked(self):
         ''' Called when we click the manage accounts button '''
 
-        self.accounts.show()
+        self.accounts.exec_()  # Blocking window
 
     @QtCore.pyqtSignature("")
     def on_commandLinkButton_authenticate_clicked(self):

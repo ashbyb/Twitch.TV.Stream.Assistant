@@ -11,44 +11,61 @@ from PyQt4 import QtCore, QtGui
 from AccountManagementWindow_v1 import Ui_Dialog_Account_Management
 
 
+# Let's build a simple class to hold information on our accounts
+class BotAccount(object):
+    def __init__(self, username, password, channel):
+        self.username = username
+        self.password = password
+        self.channel = channel
+
+    def __repr__(self):
+        return "%s:%s:%s" % (self.username, self.password, self.channel)
+
+
 class Account_Management_Dialog(QtGui.QDialog):
     def __init__(self, parent):
         QtGui.QDialog.__init__(self, parent, QtCore.Qt.WindowSystemMenuHint | QtCore.Qt.WindowTitleHint)
 
-        #Create our account window
+        # Create our account window
         self.accounts = Ui_Dialog_Account_Management()
         self.accounts.setupUi(self)
 
-        # Maintain password in a dict (There is no intention to store these passwords securly, so don't even start. >:| )
-        self.passwords = {}
+        # List of all accounts
+        self.accountsDict = {}
 
     @QtCore.pyqtSignature("")
     def on_pushButton_add_clicked(self):
-        if self.accounts.lineEdit_username.text() != '' and self.accounts.lineEdit_username.text() not in self.passwords and self.accounts.lineEdit_password.text() != '' and (self.accounts.lineEdit_password.text() == self.accounts.lineEdit_password_confirm.text()):
-            self.passwords[self.accounts.lineEdit_username.text()] = self.accounts.lineEdit_password.text()
-            item = QtGui.QListWidgetItem(self.accounts.lineEdit_username.text(), self.accounts.listWidget_accounts)
-            item.setTextAlignment(QtCore.Qt.AlignCenter)
-            self.accounts.lineEdit_username.setText("")
-            self.accounts.lineEdit_password.setText("")
-            self.accounts.lineEdit_password_confirm.setText("")
-        elif self.accounts.lineEdit_username.text() == '' or self.accounts.lineEdit_username.text() in self.passwords:
+        # Simple checks of input
+        if self.accounts.lineEdit_username.text() == '' or self.accounts.lineEdit_username.text() in self.accountsDict:
             self.accounts.lineEdit_username.selectAll()
             self.accounts.lineEdit_username.setFocus()
         elif self.accounts.lineEdit_password.text() == '':
             self.accounts.lineEdit_password.selectAll()
             self.accounts.lineEdit_password.setFocus()
-        else:
+        elif self.accounts.lineEdit_password.text() != self.accounts.lineEdit_password_confirm.text():
             self.accounts.lineEdit_password_confirm.selectAll()
             self.accounts.lineEdit_password_confirm.setFocus()
-
+        elif self.accounts.lineEdit_default_channel.text() == '' or self.accounts.lineEdit_default_channel.text()[0] != '#':
+            self.accounts.lineEdit_default_channel.selectAll()
+            self.accounts.lineEdit_default_channel.setFocus()
+        else:
+            # Input is good
+            self.accountsDict[self.accounts.lineEdit_username.text()] = BotAccount(self.accounts.lineEdit_username.text(), self.accounts.lineEdit_password.text(), self.accounts.lineEdit_default_channel.text())
+            item = QtGui.QListWidgetItem(self.accounts.lineEdit_username.text(), self.accounts.listWidget_accounts)
+            item.setTextAlignment(QtCore.Qt.AlignCenter)
+            self.accounts.lineEdit_username.setText("")
+            self.accounts.lineEdit_password.setText("")
+            self.accounts.lineEdit_password_confirm.setText("")
+            self.accounts.lineEdit_default_channel.setText("")
+        
     def on_listWidget_accounts_currentItemChanged(self, item, olditem):
         if item is not None:
-            self.accounts.groupBox_2.setEnabled(True)
+            self.accounts.groupBox_edit_account.setEnabled(True)
 
     @QtCore.pyqtSignature("")
     def on_pushButton_remove_clicked(self):
         item = self.accounts.listWidget_accounts.takeItem(self.accounts.listWidget_accounts.currentRow())
-        del self.passwords[item.text()]
+        del self.accountsDict[item.text()]
         if self.accounts.listWidget_accounts.currentRow() < 0 and self.accounts.listWidget_accounts.count() > 0:
             self.accounts.listWidget_accounts.setCurrentItem(self.accounts.listWidget_accounts.item(0))
             self.accounts.listWidget_accounts.setFocus()
@@ -56,10 +73,12 @@ class Account_Management_Dialog(QtGui.QDialog):
             self.accounts.listWidget_accounts.setCurrentItem(self.accounts.listWidget_accounts.item(self.accounts.listWidget_accounts.currentRow()))
             self.accounts.listWidget_accounts.setFocus()
         else:
-            self.accounts.groupBox_2.setEnabled(False)
+            self.accounts.groupBox_edit_account.setEnabled(False)
 
     def requestSession(self):
         ''' Called when credentials (session data) needed to authenticate a bot '''
+
+        # TODO: Implement selecting a specific acount on request and not default to the first item in the list
 
         return {'nickname': 'opopbot', 'channel': '#rpigamer', 'port': 6667, 'server': 'rpigamer.jtvirc.com', 'password': ''}
 
@@ -79,6 +98,11 @@ class Account_Management_Dialog(QtGui.QDialog):
         '''
 
         for item in accountlist:
+            strings_account = QtCore.QStringList()
+            strings_account.append(str(datetime.datetime.now().strftime("%H:%M:%S")))
+            strings_chat.append(data[1])
+            strings_chat.append(data[0])
+            QtGui.QTreeWidgetItem(self.ui.treeWidget_chat, strings_chat)
             appendedItem = QtGui.QListWidgetItem(item.toString().split(':')[0], self.accounts.listWidget_accounts)
             appendedItem.setTextAlignment(QtCore.Qt.AlignCenter)
             self.passwords[item.toString().split(':')[0]] = item.toString().split(':')[1]
