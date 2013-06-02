@@ -3,7 +3,14 @@ Twitch.tv Stream Assistant
 
 <p align="center">
   <img src="http://i.imgur.com/Sz85eic.png" alt="Twitch.Tv IRC Bot Interface"/>
+  <br> (As of May 31 2013)
   <br> A system that automates a number of tasks to aid in streaming and community involvment.
+</p>
+
+<p align="center">
+  <img src="http://i.imgur.com/oLeYf8O.gif" alt="Twitch.Tv IRC Bot Interface Example 2"/>
+  <br>(As of June 2 2013)
+  <br> A quick look at the chat client in motion
 </p>
 
 A short feature list 
