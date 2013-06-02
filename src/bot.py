@@ -37,12 +37,15 @@ class TwitchBot(irc.bot.SingleServerIRCBot):
         irc.bot.SingleServerIRCBot.__init__(self, [serverSpec], nickname, nickname, reconnection_interval=0)
 
     def on_nicknameinuse(self, c, e):
+        print "Dup Nick?"
         c.nick(c.get_nickname() + "_")
 
     def on_welcome(self, c, e):
-        print "yar"
-        self.parent.emit(QtCore.SIGNAL("IRCAuthenticationSuccess"))
         c.join(self.channel)
+
+    def on_join(self, c, e):
+        print "Join!"
+        self.parent.emit(QtCore.SIGNAL("IRCAuthenticationSuccess"))
 
     def on_privmsg(self, c, e):
         pass

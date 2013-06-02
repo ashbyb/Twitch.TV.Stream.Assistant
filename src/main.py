@@ -134,8 +134,8 @@ class Main(QtGui.QMainWindow):
 
         strings_chat = QtCore.QStringList()
         strings_chat.append(str(datetime.datetime.now().strftime("%H:%M:%S")))
-        strings_chat.append(data[1])
         strings_chat.append(data[0])
+        strings_chat.append(data[1])
         QtGui.QTreeWidgetItem(self.ui.treeWidget_chat, strings_chat)
 
     def handleTwitchBotAuthenticationSuccess(self):
