@@ -1,7 +1,10 @@
 Twitch.tv Stream Assistant
 =============
 
-A system that automates a number of tasks to aid in streaming and community involvment.
+<p align="center">
+  <img src="http://i.imgur.com/Sz85eic.png" alt="Twitch.Tv IRC Bot Interface"/>
+  <br> A system that automates a number of tasks to aid in streaming and community involvment.
+</p>
 
 A short feature list 
 --------------------
