@@ -80,7 +80,7 @@ class Account_Management_Dialog(QtGui.QDialog):
 
         # TODO: Implement selecting a specific acount on request and not default to the first item in the list
 
-        return {'nickname': 'opopbot', 'channel': '#rpigamer', 'port': 6667, 'server': 'rpigamer.jtvirc.com', 'password': 'nerrad1224'}
+        return {'nickname': 'opopbot', 'channel': '#rpigamer', 'port': 6667, 'server': 'rpigamer.jtvirc.com', 'password': ''}
 
     def exportAccountList(self):
         '''
