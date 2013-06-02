@@ -10,6 +10,7 @@ Created on May 31, 2013
 
 # Import python libs
 import Queue
+import time
 
 # Import Core Qt modules
 from PyQt4 import QtCore, QtGui
@@ -28,9 +29,6 @@ class twitchBotThread(QtCore.QThread):
         self.running = running
         self.failureThreshold = failureThreshold
 
-        # Let's construct our bot with our session data
-        self.bot = TwitchBot(self, self.session['channel'], self.session['nickname'], self.session['server'], self.session['port'], self.session['password'])
-
     def stop(self):
         self.running = False
 
@@ -44,20 +42,22 @@ class twitchBotThread(QtCore.QThread):
             except:
                 failures += 1
                 if failures > self.failureThreshold:
-                    import traceback
-                    print "TWITCHBOT ERROR:", sys.exc_info()[:-1], traceback.print_tb(sys.exc_info()[2], file=sys.stdout)
                     self.running = False
                 else:
-                    time.sleep(3)
+                    self.emit(QtCore.SIGNAL("botThreadPartialFailure"), failures, self.failureThreshold)
+                    time.sleep(1)
             else:
                 self.running = False
 
     def _run(self):
         ''' Main function of thread. Runs the twitch bot main loop '''
 
-        print "Enter"
-        self.bot.start()
-        print "Exit"
+        try:
+            # Build and run bot in _run, so failures in both commands can be caught in failure threshold logic
+            self.bot = TwitchBot(self, self.session['channel'], self.session['nickname'], self.session['server'], self.session['port'], self.session['password'])
+            self.bot.start()
+        except Exception,e:
+            print str(e)
 
 # Class that handles giving threads IDs (PyQt does not implement this natively)
 class threadIdSpooler(QtCore.QObject):

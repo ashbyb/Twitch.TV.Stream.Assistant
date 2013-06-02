@@ -125,6 +125,7 @@ class Main(QtGui.QMainWindow):
         QtCore.QObject.connect(self.twitchBotThread, QtCore.SIGNAL("finished()"), self.handleTwitchBotThreadDeath)
         QtCore.QObject.connect(self.twitchBotThread, QtCore.SIGNAL("anIRCMessage"), self.handleTwitchBotIRCMessage)
         QtCore.QObject.connect(self.twitchBotThread, QtCore.SIGNAL("IRCAuthenticationSuccess"), self.handleTwitchBotAuthenticationSuccess)
+        QtCore.QObject.connect(self.twitchBotThread, QtCore.SIGNAL("botThreadPartialFailure"), self.handleTwitchBotThreadPartialFailure)
         self.twitchBotThread.start()
 
     def handleTwitchBotIRCMessage(self, data):
@@ -148,8 +149,15 @@ class Main(QtGui.QMainWindow):
 
         # TODO: This logic is simple and only works when we are using 1 bot at a time. If we start using multiple bots at once, then this needs to be modified
 
-        self.ui.commandLinkButton_authenticate.setEnabled(True)
-        self.ui.stackedWidget_main.setCurrentIndex(0) # Set to program start-up interface        
+        self.ui.frame_buttons.setEnabled(True)
+        self.ui.stackedWidget_main.setCurrentIndex(0) # Set to program start-up interface
+        self.ui.commandLinkButton_authenticate.setText("Authentication Failure")      
+        self.ui.commandLinkButton_authenticate.setDescription("Check your saved accounts")
+
+    def handleTwitchBotThreadPartialFailure(self, count, _max):
+        ''' SLOT. Twitch Bot Threads have a failure threshold. As we fail (but have NOT reached the failure threshold) a emit is sent to let the user know about the failure '''
+
+        self.ui.commandLinkButton_authenticate.setDescription("Attempt %d of %d" % (count, _max))
 
 def main():
 

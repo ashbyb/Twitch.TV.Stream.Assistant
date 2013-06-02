@@ -80,7 +80,12 @@ class Account_Management_Dialog(QtGui.QDialog):
 
         # TODO: Implement selecting a specific acount on request and not default to the first item in the list
 
-        return {'nickname': 'opopbot', 'channel': '#rpigamer', 'port': 6667, 'server': 'rpigamer.jtvirc.com', 'password': ''}
+        account = self.accounts.listWidget_accounts.item(0)
+        if account is not None:
+            match = self.accountsDict[account.text()]
+            return {'nickname': match.username, 'channel': match.channel, 'port': 6667, 'server': 'rpigamer.jtvirc.com', 'password': match.password}
+        else:
+            return {}
 
     def exportAccountList(self):
         '''
@@ -89,7 +94,7 @@ class Account_Management_Dialog(QtGui.QDialog):
 
         tmplist = []
         for i in range(self.accounts.listWidget_accounts.count()):
-            tmplist.append(self.accounts.listWidget_accounts.item(i).text() + ':' + self.passwords[self.accounts.listWidget_accounts.item(i).text()])
+            tmplist.append(self.accountsDict[self.accounts.listWidget_accounts.item(i).text()])
         return tmplist
 
     def loadAccountList(self, accountlist):
@@ -98,14 +103,10 @@ class Account_Management_Dialog(QtGui.QDialog):
         '''
 
         for item in accountlist:
-            strings_account = QtCore.QStringList()
-            strings_account.append(str(datetime.datetime.now().strftime("%H:%M:%S")))
-            strings_chat.append(data[1])
-            strings_chat.append(data[0])
-            QtGui.QTreeWidgetItem(self.ui.treeWidget_chat, strings_chat)
-            appendedItem = QtGui.QListWidgetItem(item.toString().split(':')[0], self.accounts.listWidget_accounts)
-            appendedItem.setTextAlignment(QtCore.Qt.AlignCenter)
-            self.passwords[item.toString().split(':')[0]] = item.toString().split(':')[1]
+            account = item.toPyObject() # Turns into our BotAccount object
+            item = QtGui.QListWidgetItem(account.username, self.accounts.listWidget_accounts)
+            item.setTextAlignment(QtCore.Qt.AlignCenter)
+            self.accountsDict[account.username] = BotAccount(account.username, account.password, account.channel)
 
     def exportLayoutDefaults(self):
         '''
