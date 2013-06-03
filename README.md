@@ -51,7 +51,7 @@ So you will need:
  * [pipy IRC 8.3 Library](https://pypi.python.org/pypi/irc/)
  * [PyQt4](http://www.riverbankcomputing.com/software/pyqt/download)
  
->You may need to install [steuptools](https://pypi.python.org/pypi/setuptools) before you can install the dependancies.
+>You may need to install [setuptools](https://pypi.python.org/pypi/setuptools) before you can install the above dependancies.
 
 Once you have everything installed, run:
     `> path\to\python main.py`
