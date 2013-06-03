@@ -83,7 +83,7 @@ class Account_Management_Dialog(QtGui.QDialog):
         account = self.accounts.listWidget_accounts.item(0)
         if account is not None:
             match = self.accountsDict[account.text()]
-            return {'nickname': match.username, 'channel': match.channel, 'port': 6667, 'server': 'rpigamer.jtvirc.com', 'password': match.password}
+            return {'nickname': str(match.username), 'channel': str(match.channel), 'port': 6667, 'server': str('irc.twitch.tv'), 'password': str(match.password)}
         else:
             return {}
 
@@ -106,7 +106,7 @@ class Account_Management_Dialog(QtGui.QDialog):
             account = item.toPyObject() # Turns into our BotAccount object
             item = QtGui.QListWidgetItem(account.username, self.accounts.listWidget_accounts)
             item.setTextAlignment(QtCore.Qt.AlignCenter)
-            self.accountsDict[account.username] = BotAccount(account.username, account.password, account.channel)
+            self.accountsDict[account.username] = account
 
     def exportLayoutDefaults(self):
         '''
