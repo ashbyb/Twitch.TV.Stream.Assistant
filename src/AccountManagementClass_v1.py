@@ -83,7 +83,7 @@ class Account_Management_Dialog(QtGui.QDialog):
         account = self.accounts.listWidget_accounts.item(0)
         if account is not None:
             match = self.accountsDict[account.text()]
-            return {'nickname': str(match.username), 'channel': str(match.channel), 'port': 6667, 'server': str('irc.twitch.tv'), 'password': str(match.password)}
+            return {'nickname': str(match.username), 'channel': str(match.channel), 'port': 6667, 'server': str('199.9.253.199'), 'password': str(match.password)}
         else:
             return {}
 

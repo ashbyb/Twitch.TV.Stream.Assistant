@@ -144,6 +144,10 @@ class Main(QtGui.QMainWindow):
 
         self.ui.stackedWidget_main.setCurrentIndex(1) # Set to chat interface
 
+        # Focus input after switching to chat view (for usability)
+        self.ui.lineEdit_chat_input.selectAll()
+        self.ui.lineEdit_chat_input.setFocus()
+
     def handleTwitchBotThreadDeath(self):
         ''' SLOT. Called by twitch bot thread when it has terminated '''
 
@@ -158,6 +162,24 @@ class Main(QtGui.QMainWindow):
         ''' SLOT. Twitch Bot Threads have a failure threshold. As we fail (but have NOT reached the failure threshold) a emit is sent to let the user know about the failure '''
 
         self.ui.commandLinkButton_authenticate.setDescription("Attempt %d of %d" % (count, _max))
+    
+    @QtCore.pyqtSignature("")
+    def on_pushButton_chat_send_clicked(self):
+        ''' Called when we click the chat send button to send a message to the IRC chatroom via the UI '''
+                
+        if self.ui.lineEdit_chat_input.text() != '':
+            # Get text from input, emit it
+            self.emit(QtCore.SIGNAL("sendIRCMessageToRoom"), self.ui.lineEdit_chat_input.text())
+            # Show locally generated message in local chat log (this emit won't be caught by the TwitchBot thread)
+            self.handleTwitchBotIRCMessage([self.twitchBotThread.session['nickname'], self.ui.lineEdit_chat_input.text()])
+            # Clear input for next message
+            self.ui.lineEdit_chat_input.setText("")
+        
+        # Focus input after sending, do even if nothing in input (if we are clicking the button we want to focus the lineEdit anyway)
+        self.ui.lineEdit_chat_input.selectAll()
+        self.ui.lineEdit_chat_input.setFocus()
+
+        
 
 def main():
 

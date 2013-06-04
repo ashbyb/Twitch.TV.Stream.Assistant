@@ -29,6 +29,9 @@ class twitchBotThread(QtCore.QThread):
         self.running = running
         self.failureThreshold = failureThreshold
 
+        # Bind parent event for talking through us to chat room
+        QtCore.QObject.connect(self.parent, QtCore.SIGNAL("sendIRCMessageToRoom"), self.talk)
+
     def stop(self):
         self.running = False
 
@@ -58,6 +61,11 @@ class twitchBotThread(QtCore.QThread):
             self.bot.start()
         except Exception,e:
             print str(e)
+
+    def talk(self, msg):
+        ''' SLOT. Called by GUI when user is talking to IRC chatroom from UI '''
+
+        self.bot.talk(msg)
 
 # Class that handles giving threads IDs (PyQt does not implement this natively)
 class threadIdSpooler(QtCore.QObject):

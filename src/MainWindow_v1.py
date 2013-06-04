@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file '..\ui\MainWindow_v1.ui'
 #
-# Created: Sat Jun 01 18:37:55 2013
+# Created: Mon Jun 03 22:27:56 2013
 #      by: PyQt4 UI code generator 4.9.6
 #
 # WARNING! All changes made in this file will be lost!
@@ -26,7 +26,7 @@ except AttributeError:
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName(_fromUtf8("MainWindow"))
-        MainWindow.resize(260, 249)
+        MainWindow.resize(350, 257)
         icon = QtGui.QIcon()
         icon.addPixmap(QtGui.QPixmap(_fromUtf8(":/icons/assets/icons/Gnome-Input-Gaming.ico")), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         MainWindow.setWindowIcon(icon)
@@ -152,9 +152,24 @@ class Ui_MainWindow(object):
         self.treeWidget_chat.header().setMinimumSectionSize(10)
         self.treeWidget_chat.header().setStretchLastSection(True)
         self.verticalLayout_2.addWidget(self.treeWidget_chat)
-        self.lineEdit = QtGui.QLineEdit(self.chatview)
-        self.lineEdit.setObjectName(_fromUtf8("lineEdit"))
-        self.verticalLayout_2.addWidget(self.lineEdit)
+        self.frame_chat_input = QtGui.QFrame(self.chatview)
+        self.frame_chat_input.setFrameShape(QtGui.QFrame.NoFrame)
+        self.frame_chat_input.setFrameShadow(QtGui.QFrame.Plain)
+        self.frame_chat_input.setObjectName(_fromUtf8("frame_chat_input"))
+        self.horizontalLayout_2 = QtGui.QHBoxLayout(self.frame_chat_input)
+        self.horizontalLayout_2.setSpacing(5)
+        self.horizontalLayout_2.setMargin(0)
+        self.horizontalLayout_2.setObjectName(_fromUtf8("horizontalLayout_2"))
+        self.lineEdit_chat_input = QtGui.QLineEdit(self.frame_chat_input)
+        self.lineEdit_chat_input.setObjectName(_fromUtf8("lineEdit_chat_input"))
+        self.horizontalLayout_2.addWidget(self.lineEdit_chat_input)
+        self.pushButton_chat_send = QtGui.QPushButton(self.frame_chat_input)
+        self.pushButton_chat_send.setIcon(icon4)
+        self.pushButton_chat_send.setAutoDefault(False)
+        self.pushButton_chat_send.setDefault(False)
+        self.pushButton_chat_send.setObjectName(_fromUtf8("pushButton_chat_send"))
+        self.horizontalLayout_2.addWidget(self.pushButton_chat_send)
+        self.verticalLayout_2.addWidget(self.frame_chat_input)
         icon5 = QtGui.QIcon()
         icon5.addPixmap(QtGui.QPixmap(_fromUtf8(":/icons/assets/icons/Gnome-Computer.ico")), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.tabWidget.addTab(self.chatview, icon5, _fromUtf8(""))
@@ -170,7 +185,7 @@ class Ui_MainWindow(object):
         self.verticalLayout_4.addWidget(self.stackedWidget_main)
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtGui.QMenuBar(MainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 260, 18))
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 350, 18))
         self.menubar.setObjectName(_fromUtf8("menubar"))
         self.menuFile = QtGui.QMenu(self.menubar)
         self.menuFile.setObjectName(_fromUtf8("menuFile"))
@@ -203,6 +218,7 @@ class Ui_MainWindow(object):
         self.stackedWidget_main.setCurrentIndex(0)
         self.tabWidget.setCurrentIndex(0)
         QtCore.QObject.connect(self.actionExit, QtCore.SIGNAL(_fromUtf8("triggered()")), MainWindow.close)
+        QtCore.QObject.connect(self.lineEdit_chat_input, QtCore.SIGNAL(_fromUtf8("returnPressed()")), self.pushButton_chat_send.click)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
@@ -215,6 +231,7 @@ class Ui_MainWindow(object):
         self.treeWidget_chat.headerItem().setText(0, _translate("MainWindow", "Time", None))
         self.treeWidget_chat.headerItem().setText(1, _translate("MainWindow", "Name", None))
         self.treeWidget_chat.headerItem().setText(2, _translate("MainWindow", "Message", None))
+        self.pushButton_chat_send.setText(_translate("MainWindow", "Send", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.chatview), _translate("MainWindow", "Chat", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.statistics), _translate("MainWindow", "Statistics", None))
         self.menuFile.setTitle(_translate("MainWindow", "File", None))

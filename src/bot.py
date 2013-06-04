@@ -81,3 +81,10 @@ class TwitchBot(irc.bot.SingleServerIRCBot):
             c.privmsg(nick, "Hello World. I am OpOpBot.")
         else:
             pass
+
+    def talk(self, msg):
+        ''' pseudo-SLOT. Called from GUI when user wants to talk to the IRC room from the UI '''
+
+        self.connection.privmsg(self.channel, msg)
+
+
