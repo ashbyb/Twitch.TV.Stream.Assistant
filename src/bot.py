@@ -59,12 +59,15 @@ class TwitchBot(irc.bot.SingleServerIRCBot):
     def do_command(self, e, cmd):
         nick = self.channel
         c = self.connection
-
+        
+        # TODO: add emits for all messages in this command
+        
         if cmd == "disconnect":
             self.disconnect()
         elif cmd == "die":
             self.die()
         elif cmd == "stats":
+
             for chname, chobj in self.channels.items():
                 c.privmsg(nick, "--- Channel statistics ---")
                 c.privmsg(nick, "Channel: " + chname)
@@ -79,6 +82,7 @@ class TwitchBot(irc.bot.SingleServerIRCBot):
                 c.privmsg(nick, "Voiced: " + ", ".join(voiced))
         elif cmd == "helloworld":
             c.privmsg(nick, "Hello World. I am OpOpBot.")
+            self.parent.emit(QtCore.SIGNAL("anIRCMessage"), [nick, "Hello World. I am OpOpBot."])
         else:
             pass
 
